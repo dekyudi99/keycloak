@@ -1,0 +1,9 @@
+-- ==============================================================================
+-- Keycloak PostGIS Initial Database Template
+-- ==============================================================================
+-- Aktifkan ekstensi PostGIS:
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+-- File ini adalah template. Jika Anda ingin melakukan restore dump database riil,
+-- letakkan file SQL dump Anda dengan nama 01-init-keycloak.sql di folder ini.
+-- File .sql otomatis di-ignore oleh Git agar kredensial tidak bocor ke publik.

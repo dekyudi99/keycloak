@@ -1,0 +1,46 @@
+﻿@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-page: #f8fafc; /* slate-50 */
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-main: #0f172a; /* slate-900 */
+  --text-muted: #64748b; /* slate-500 */
+  --border-card: #e2e8f0; /* slate-200 */
+  --border-input: #cbd5e1; /* slate-300 */
+  --btn-primary-bg: #0f172a; /* slate-900 */
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #1e293b; /* slate-800 */
+  --color-error: #ef4444; /* red-500 */
+  --color-error-bg: #fef2f2; /* red-50 */
+  --color-error-border: #fecaca; /* red-200 */
+  --color-success: #10b981;
+}
+
+.dark {
+  --bg-page: #020617; /* slate-950 */
+  --bg-card: #0f172a; /* slate-900 */
+  --bg-input: #0f172a;
+  --text-main: #f8fafc; /* slate-50 */
+  --text-muted: #94a3b8; /* slate-400 */
+  --border-card: #1e293b; /* slate-800 */
+  --border-input: #334155; /* slate-700 */
+  --btn-primary-bg: #f8fafc; /* crisp white in dark */
+  --btn-primary-text: #0f172a; /* dark slate */
+  --btn-primary-hover: #ffffff;
+  --color-error: #f87171; /* red-400 */
+  --color-error-bg: #450a0a; /* dark red */
+  --color-error-border: #7f1d1d;
+  --color-success: #34d399;
+}
+
+html, body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}

@@ -1,0 +1,70 @@
+services:
+  keycloak-db:
+    image: postgis/postgis:16-3.4
+    container_name: keycloak-postgis
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${KEYCLOAK_DB_USER:-keycloak_svc}
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      POSTGRES_DB: ${KEYCLOAK_DB_NAME:-keycloak}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    command:
+      - postgres
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - max_connections=100
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${DB_BIND_IP:-127.0.0.1}:${KEYCLOAK_DB_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${KEYCLOAK_DB_USER:-keycloak_svc} -d ${KEYCLOAK_DB_NAME:-keycloak}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      keycloak-net:
+      db-central-net:
+        aliases: [keycloak-db]
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4
+    container_name: keycloak-service
+    restart: unless-stopped
+    command: ["start-dev", "--import-realm"]
+    env_file: .env
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USER:-admin}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://${KEYCLOAK_DB_HOST:-keycloak-db}:${KEYCLOAK_DB_INTERNAL_PORT:-5432}/${KEYCLOAK_DB_NAME:-keycloak}
+      KC_DB_USERNAME: ${KEYCLOAK_DB_USER:-keycloak_svc}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_HOSTNAME: ${KEYCLOAK_HOSTNAME:-http://localhost:8081}
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
+      KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./import:/opt/keycloak/data/import:ro
+      - ./theme/dist_keycloak/keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/wefgis-theme.jar:ro
+    ports:
+      - "${DB_BIND_IP:-127.0.0.1}:${KEYCLOAK_HTTP_PORT:-8081}:8080"
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    networks:
+      keycloak-net:
+      db-central-net:
+        aliases: [keycloak]
+
+volumes:
+  keycloak_db_data:
+
+networks:
+  keycloak-net:
+    name: keycloak-internal-net
+  db-central-net:
+    name: db-central-net
+    external: true

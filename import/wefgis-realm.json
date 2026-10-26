@@ -1,0 +1,177 @@
+{
+  "realm": "wefgis",
+  "displayName": "WefGIS",
+  "enabled": true,
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "rememberMe": true,
+  "verifyEmail": false,
+  "accessTokenLifespan": 600,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "roles": {
+    "realm": [
+      {
+        "name": "admin",
+        "description": "Administrator platform"
+      },
+      {
+        "name": "analyst",
+        "description": "Analis"
+      },
+      {
+        "name": "viewer",
+        "description": "Hanya melihat"
+      },
+      {
+        "name": "app-voxagis",
+        "description": "Boleh membuka VoxaGIS"
+      },
+      {
+        "name": "app-flowgis",
+        "description": "Boleh membuka FlowGIS"
+      },
+      {
+        "name": "app-grovia",
+        "description": "Boleh membuka Grovia"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "portal",
+      "name": "Portal SSO",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "rootUrl": "http://localhost:5170",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:5170/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5170"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5170/*"
+      }
+    },
+    {
+      "clientId": "voxagis",
+      "name": "VoxaGIS",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "rootUrl": "http://localhost:5175",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:5175/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5175"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5175/*"
+      }
+    },
+    {
+      "clientId": "flowgis",
+      "name": "FlowGIS",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "rootUrl": "http://localhost:5174",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:5174/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5174"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5174/*"
+      }
+    },
+    {
+      "clientId": "grovia",
+      "name": "Grovia",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "rootUrl": "http://localhost:5173",
+      "baseUrl": "/",
+      "redirectUris": [
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5173/*"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "wefgis_admin",
+      "email": "admin@wefgis.local",
+      "firstName": "WefGIS",
+      "lastName": "Admin",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "wefgis123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "admin",
+        "analyst",
+        "app-voxagis",
+        "app-flowgis",
+        "app-grovia"
+      ]
+    },
+    {
+      "username": "wefgis_analyst",
+      "email": "analyst@wefgis.local",
+      "firstName": "WefGIS",
+      "lastName": "Analyst",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "wefgis123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "analyst",
+        "app-voxagis",
+        "app-flowgis",
+        "app-grovia"
+      ]
+    }
+  ],
+  "internationalizationEnabled": true,
+  "supportedLocales": [
+    "en",
+    "id",
+    "th"
+  ],
+  "defaultLocale": "en",
+  "loginTheme": "wefgis"
+}

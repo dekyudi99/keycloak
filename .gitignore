@@ -1,0 +1,28 @@
+# Environment Variables & Secrets
+.env
+.env*.local
+!.env.example
+
+# Docker Compose Local Override (ignore local compose to avoid production overwrite)
+docker-compose.yml
+docker-compose.override.yml
+!docker-compose.yml.example
+
+# Database Dumps & SQL files containing sensitive credentials/hashes
+init/*.sql
+!init/*.sql.example
+*.sql
+*.dump
+*.tar
+*.bak
+
+# Certificates & Private Keys
+*.pem
+*.key
+*.crt
+*.p12
+
+# Dependencies & Build Caches
+theme/node_modules/
+theme/storybook-static/
+theme/dist/
