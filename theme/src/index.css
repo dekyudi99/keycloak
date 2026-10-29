@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
 
@@ -43,4 +43,68 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+}
+
+/* Hyperlink / Link Text Styling (Semua link teks berwarna biru cerah & bergaris bawah) */
+a,
+a:link,
+a:visited,
+.instruction a,
+.alert a,
+#kc-content a,
+#kc-info a,
+#kc-info-message a,
+p a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  font-weight: 600 !important;
+  transition: color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out;
+}
+
+a:hover,
+.instruction a:hover,
+.alert a:hover,
+#kc-content a:hover,
+#kc-info a:hover,
+#kc-info-message a:hover,
+p a:hover {
+  color: #1d4ed8 !important;
+  text-decoration-color: #1d4ed8 !important;
+}
+
+/* Mode Gelap (Dark Mode) - Warna Biru Muda Terang */
+.dark a,
+.dark a:link,
+.dark a:visited,
+.dark .instruction a,
+.dark .alert a,
+.dark #kc-content a,
+.dark #kc-info a,
+.dark #kc-info-message a,
+.dark p a {
+  color: #60a5fa !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+.dark a:hover,
+.dark .instruction a:hover,
+.dark .alert a:hover,
+.dark #kc-content a:hover,
+.dark #kc-info a:hover,
+.dark #kc-info-message a:hover,
+.dark p a:hover {
+  color: #93c5fd !important;
+  text-decoration-color: #93c5fd !important;
+}
+
+/* Pengecualian agar tombol aksi (role="button" atau .btn) tidak tergaris bawahi */
+a[role="button"],
+a.btn,
+a[class*="bg-slate-"],
+a[class*="bg-white"],
+a[class*="bg-blue-600"],
+a.pf-c-button {
+  text-decoration: none !important;
 }
